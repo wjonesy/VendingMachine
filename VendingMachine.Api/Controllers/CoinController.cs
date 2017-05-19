@@ -22,12 +22,22 @@ namespace VendingMachine.Api.Controllers
         [HttpPost]
         public IHttpActionResult Insert(InsertedCoin coin)
         {
+            // save the new coin in the machine
+            // return the value of the amount of coins in the machine
             if (coin == null)
             {
                 return BadRequest();
             }
             var value = _coinService.GetCoinValue(coin);
             return Ok(value);
+        }
+
+        [HttpGet]
+        [Route("")]
+        public IHttpActionResult Refund()
+        {
+            // return the inserted coins
+            return Ok();
         }
     }
 }

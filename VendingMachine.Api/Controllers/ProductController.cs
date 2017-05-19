@@ -24,11 +24,11 @@ namespace VendingMachine.Api.Controllers
 
         public IHttpActionResult Vend(int productId)
         {
-            // check total is more than product
+            // check total coin value in machine is more than product
 
             // if not return price and amount in machine
 
-            // if is ok return THANK YOU
+            // if is ok return THANK YOU and remove the coins from the machine's cache
 
             return Ok();
         }
