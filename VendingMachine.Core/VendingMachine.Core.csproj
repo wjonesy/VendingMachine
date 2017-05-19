@@ -47,17 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Coin.cs" />
-    <Compile Include="CoinService.cs" />
-    <Compile Include="ICoinService.cs" />
-    <Compile Include="InsertedCoin.cs" />
-    <Compile Include="IVendingMachineContext.cs" />
-    <Compile Include="Product.cs" />
+    <Compile Include="Coins\Coin.cs" />
+    <Compile Include="Coins\CoinService.cs" />
+    <Compile Include="Coins\ICoinService.cs" />
+    <Compile Include="InsertedCoins\InsertedCoin.cs" />
+    <Compile Include="Products\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
