@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using VendingMachine.Core.InsertedCoins;
 
 namespace VendingMachine.Core.Coins
 {
@@ -15,21 +14,19 @@ namespace VendingMachine.Core.Coins
 
         public CoinService()
         {
-            if (_coins == null)
-            {
-                _coins = new List<Coin>(); _coins.Add(new Coin { Value = 0.01 });
-                _coins.Add(new Coin { Value = 0.02 });
-                _coins.Add(new Coin { Value = 0.05 });
-                _coins.Add(new Coin { Value = 0.10 });
-            }
-            if (_availableCoins == null)
-            {
-                _availableCoins = new List<InsertedCoin>();
-                _availableCoins.Add(new InsertedCoin(19.05, 1.55, 2.5));
-                _availableCoins.Add(new InsertedCoin(21.20, 1.95, 5));
-                _availableCoins.Add(new InsertedCoin(17.9, 1.35, 2.27));
-                _availableCoins.Add(new InsertedCoin(24.26, 1.75, 5.67));
-            }
+            _coins = new List<Coin>() {
+                CoinConstants.Penny,
+                CoinConstants.Nickel,
+                CoinConstants.Dime,
+                CoinConstants.Quarter
+            };
+
+            _availableCoins = new List<InsertedCoin>() {
+                InsertedCoinsConstants.Penny,
+                InsertedCoinsConstants.Nickel,
+                InsertedCoinsConstants.Dime,
+                InsertedCoinsConstants.Quarter
+            };
 
             if (_coinDimensionsToCoinValueMap == null)
             {

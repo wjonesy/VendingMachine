@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VendingMachine.Core.InsertedCoins
+﻿namespace VendingMachine.Core.InsertedCoins
 {
     public class InsertedCoin
     {
+        private InsertedCoin() { }
+
         public InsertedCoin(double diameter, double thickness, double weight)
         {
-            Diameter = diameter;
-            Thickness = thickness;
-            Weight = weight;
+            this.Diameter = diameter;
+            this.Thickness = thickness;
+            this.Weight = weight;
         }
         public double Weight { get; set; }
         public double Thickness { get; set; }

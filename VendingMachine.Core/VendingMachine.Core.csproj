@@ -48,9 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coins\Coin.cs" />
+    <Compile Include="Coins\CoinConstants.cs" />
     <Compile Include="Coins\CoinService.cs" />
     <Compile Include="Coins\ICoinService.cs" />
     <Compile Include="InsertedCoins\InsertedCoin.cs" />
+    <Compile Include="InsertedCoins\InsertedCoinsConstants.cs" />
     <Compile Include="Products\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

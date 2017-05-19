@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using VendingMachine.Core;
+using VendingMachine.Core.Products;
 
 namespace VendingMachine.Api.Controllers
 {
