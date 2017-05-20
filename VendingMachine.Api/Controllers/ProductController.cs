@@ -4,7 +4,7 @@ using VendingMachine.Core.State;
 
 namespace VendingMachine.Api.Controllers
 {
-    public class ProductController : ApiController
+    public class ProductController : BaseController
     {
         private IProductService _productService;
         private IVendingMachineStateManager _vendingMachineStateManager;
@@ -15,14 +15,16 @@ namespace VendingMachine.Api.Controllers
             _vendingMachineStateManager = vendingMachineStateManager;
         }
 
+        [HttpGet]
         public IHttpActionResult Get()
         {
             return Ok(_productService.GetAll());
         }
 
-        public IHttpActionResult Vend(int productId)
+        [HttpGet]
+        public IHttpActionResult Vend([FromUri]int id)
         {
-            return Ok(_vendingMachineStateManager.ProductSelected(productId));
+            return Ok(_vendingMachineStateManager.ProductSelected(id));
         }
     }
 }

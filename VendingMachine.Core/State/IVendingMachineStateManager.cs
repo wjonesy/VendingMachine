@@ -6,7 +6,9 @@ namespace VendingMachine.Core.State
 {
     public interface IVendingMachineStateManager
     {
-        double CoinInserted(InsertedCoin coin);
+        VendingMachineState GetCurrentState();
+
+        int CoinInserted(InsertedCoin coin);
 
         ProductSelectedResponse ProductSelected(int productId);
 

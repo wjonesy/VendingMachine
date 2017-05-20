@@ -90,5 +90,26 @@ namespace VendingMachine.Core.Tests
 
             Assert.That(coins.Count == numberOfCoins);
         }
+
+        [Test]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(6)]
+        [TestCase(16)]
+        [TestCase(27)]
+        [TestCase(33)]
+        [TestCase(125)]
+        [TestCase(126)]
+        public void CoinService_GetCoinsForAmount_ValueOfCoinsIsCorrect(int amount)
+        {
+            var coins = _sut.GetCoinsForAmount(amount);
+            var value = 0;
+            foreach (var coin in coins)
+            {
+
+                value += coin.Value;
+            }
+            Assert.That(amount == value);
+        }
     }
 }

@@ -54,6 +54,11 @@ namespace VendingMachine.Core.Coins
                 .FirstOrDefault();
         }
 
+        /// <summary>
+        /// Assumes that we have a lot of coins of all values in the machine to give as change.
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         public List<Coin> GetCoinsForAmount(int amount)
         {
             var coins = _coins.OrderByDescending(x => x.Value);
@@ -68,12 +73,17 @@ namespace VendingMachine.Core.Coins
                     var multiple = amountLeft / coin.Value;
                     if (multiple > 0)
                     {
-                        for (int i = 0; i < multiple; i++)
+                        for (int i = 1; i <= multiple; i++)
                         {
                             coinsToReturn.Add(coin);
                         }
 
                         amountLeft = amountLeft - (multiple * coin.Value);
+
+                        if (amountLeft == 0)
+                        {
+                            break;
+                        }
                     }
                 }
             }

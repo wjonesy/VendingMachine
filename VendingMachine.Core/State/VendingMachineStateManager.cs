@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Caching;
 using VendingMachine.Core.Coins;
 using VendingMachine.Core.InsertedCoins;
@@ -23,7 +24,7 @@ namespace VendingMachine.Core.State
             _productService = productService;
         }
 
-        public double CoinInserted(InsertedCoin coin)
+        public int CoinInserted(InsertedCoin coin)
         {
             // add the coin to the machine
             var coinsInMachine = GetCoinsInMachine();
@@ -58,6 +59,10 @@ namespace VendingMachine.Core.State
             }
 
             var coinsInMachine = GetCoinsInMachine();
+            if (coinsInMachine == null || !coinsInMachine.Any())
+            {
+                return new ProductSelectedResponse(product.Price);
+            }
             var totalValueInMachine = _coinService.GetCoinsTotalValue(coinsInMachine);
 
             if (totalValueInMachine < product.Price)
@@ -66,7 +71,7 @@ namespace VendingMachine.Core.State
             }
             else
             {
-
+                RemoveCoinsCache();
                 return new ProductSelectedResponse(_coinService.GetCoinsForAmount(totalValueInMachine - product.Price));
             }
         }
@@ -92,14 +97,29 @@ namespace VendingMachine.Core.State
             }
 
             // now we have all the coins, delete the cache
-            _cache.Remove(_cache_coinsInMachine);
+            RemoveCoinsCache();
 
             return refund;
+        }
+
+        private void RemoveCoinsCache()
+        {
+            _cache.Remove(_cache_coinsInMachine);
         }
 
         private List<InsertedCoin> GetCoinsInMachine()
         {
             return _cache.Get(_cache_coinsInMachine) as List<InsertedCoin>;
+        }
+
+        public VendingMachineState GetCurrentState()
+        {
+            var coinsInMachine = GetCoinsInMachine();
+            return new VendingMachineState()
+            {
+                Products = _productService.GetAll(),
+                ValueOfCoinsInMachine = coinsInMachine == null || !coinsInMachine.Any() ? 0 : _coinService.GetCoinsTotalValue(GetCoinsInMachine())
+            };
         }
     }
 }

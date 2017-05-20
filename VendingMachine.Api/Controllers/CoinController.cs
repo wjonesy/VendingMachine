@@ -4,7 +4,7 @@ using VendingMachine.Core.State;
 
 namespace VendingMachine.Api.Controllers
 {
-    public class CoinController : ApiController
+    public class CoinController : BaseController
     {
         private IVendingMachineStateManager _vendingMachineStateManager;
 
