@@ -7,16 +7,17 @@ using System.Web.Http;
 using VendingMachine.Core;
 using VendingMachine.Core.Coins;
 using VendingMachine.Core.InsertedCoins;
+using VendingMachine.Core.State;
 
 namespace VendingMachine.Api.Controllers
 {
     public class CoinController : ApiController
     {
-        private ICoinService _coinService { get; set; }
+        private IVendingMachineStateManager _vendingMachineStateManager;
 
-        public CoinController(ICoinService coinService)
+        public CoinController(IVendingMachineStateManager vendingMachineStateManager)
         {
-            _coinService = coinService;
+            _vendingMachineStateManager = vendingMachineStateManager;
         }
 
         [HttpPost]
@@ -28,8 +29,8 @@ namespace VendingMachine.Api.Controllers
             {
                 return BadRequest();
             }
-            var value = _coinService.GetCoinValue(coin);
-            return Ok(value);
+
+            return Ok(_vendingMachineStateManager.CoinInserted(coin));
         }
 
         [HttpGet]

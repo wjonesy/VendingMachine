@@ -43,6 +43,21 @@ namespace VendingMachine.Core.Coins
             }
         }
 
+        public double GetCoinsTotalValue(IEnumerable<InsertedCoin> insertedCoins)
+        {
+            double total = 0;
+            foreach (var coin in insertedCoins)
+            {
+                var value = GetCoinValue(coin);
+                if (value == null)
+                {
+                    throw new Exception("The inserted coin is not valid.");
+                }
+                total += value.Value;
+            }
+            return total;
+        }
+
         public double? GetCoinValue(InsertedCoin insertedCoin)
         {
             return _coinDimensionsToCoinValueMap

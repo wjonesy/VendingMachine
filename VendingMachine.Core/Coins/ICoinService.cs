@@ -10,5 +10,7 @@ namespace VendingMachine.Core.Coins
     public interface ICoinService
     {
         double? GetCoinValue(InsertedCoin insertedCoin);
+
+        double GetCoinsTotalValue(IEnumerable<InsertedCoin> insertedCoins);
     }
 }
