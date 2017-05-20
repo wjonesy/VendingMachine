@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using VendingMachine.Core;
+﻿using System.Web.Http;
 using VendingMachine.Core.Products;
+using VendingMachine.Core.State;
 
 namespace VendingMachine.Api.Controllers
 {
     public class ProductController : ApiController
     {
         private IProductService _productService;
+        private IVendingMachineStateManager _vendingMachineStateManager;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IVendingMachineStateManager vendingMachineStateManager)
         {
             _productService = productService;
+            _vendingMachineStateManager = vendingMachineStateManager;
         }
 
         public IHttpActionResult Get()
@@ -25,13 +22,7 @@ namespace VendingMachine.Api.Controllers
 
         public IHttpActionResult Vend(int productId)
         {
-            // check total coin value in machine is more than product
-
-            // if not return price and amount in machine
-
-            // if is ok return THANK YOU and remove the coins from the machine's cache
-
-            return Ok();
+            return Ok(_vendingMachineStateManager.ProductSelected(productId));
         }
     }
 }

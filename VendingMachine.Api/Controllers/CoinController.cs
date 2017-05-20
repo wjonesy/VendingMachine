@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using VendingMachine.Core;
-using VendingMachine.Core.Coins;
+﻿using System.Web.Http;
 using VendingMachine.Core.InsertedCoins;
 using VendingMachine.Core.State;
 
@@ -38,7 +31,7 @@ namespace VendingMachine.Api.Controllers
         public IHttpActionResult Refund()
         {
             // return the inserted coins
-            return Ok();
+            return Ok(_vendingMachineStateManager.RefundRequested());
         }
     }
 }

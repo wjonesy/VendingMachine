@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace VendingMachine.Core.Products
 {
     public interface IProductService
     {
         IEnumerable<Product> GetAll();
+        Product Get(int id);
     }
 }

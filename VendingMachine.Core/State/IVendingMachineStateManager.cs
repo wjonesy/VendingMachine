@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using VendingMachine.Core.Coins;
 using VendingMachine.Core.InsertedCoins;
-using VendingMachine.Core.Products;
 
 namespace VendingMachine.Core.State
 {
@@ -13,8 +8,8 @@ namespace VendingMachine.Core.State
     {
         double CoinInserted(InsertedCoin coin);
 
-        ProductSelectedResponse ProductSelected(Product product);
+        ProductSelectedResponse ProductSelected(int productId);
 
-        IEnumerable<Coin> RefundRequested();
+        List<Coin> RefundRequested();
     }
 }

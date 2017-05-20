@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using VendingMachine.Core.Coins;
 
 namespace VendingMachine.Core.State
@@ -14,17 +10,17 @@ namespace VendingMachine.Core.State
         public ProductSelectedResponse(double amountToPay)
         {
             this.AmountToPay = amountToPay;
-            this.Refund = null;
+            this.ReturnedCoins = null;
         }
 
-        public ProductSelectedResponse(IEnumerable<Coin> refundedCoins)
+        public ProductSelectedResponse(IEnumerable<Coin> returnedCoins)
         {
-            this.Refund = refundedCoins;
+            this.ReturnedCoins = returnedCoins;
             this.AmountToPay = null;
         }
 
-        double? AmountToPay { get; set; }
+        public double? AmountToPay { get; private set; }
 
-        IEnumerable<Coin> Refund { get; set; }
+        public IEnumerable<Coin> ReturnedCoins { get; private set; }
     }
 }

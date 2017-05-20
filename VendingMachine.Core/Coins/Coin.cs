@@ -4,10 +4,10 @@
     {
         private Coin() { }
 
-        public Coin(double value)
+        public Coin(int value)
         {
             this.Value = value;
         }
-        public double Value { get; set; }
+        public int Value { get; set; }
     }
 }

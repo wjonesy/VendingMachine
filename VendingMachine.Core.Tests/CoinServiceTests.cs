@@ -1,5 +1,8 @@
 ﻿using FakeItEasy;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using VendingMachine.Core.Coins;
 using VendingMachine.Core.InsertedCoins;
 
@@ -27,7 +30,7 @@ namespace VendingMachine.Core.Tests
 
         [Test]
         public void CoinService_GetCoinValue_ValidCoin_ReturnsValue()
-        {        
+        {
 
             var value = _sut.GetCoinValue(_coin_valid);
 
@@ -40,6 +43,52 @@ namespace VendingMachine.Core.Tests
             var value = _sut.GetCoinValue(_coin_invalid);
 
             Assert.AreEqual(null, value);
+        }
+
+        [Test]
+        public void CoinService_GetCoinsTotalValue_NoCoinsInserted_ReturnsZero()
+        {
+            var total = _sut.GetCoinsTotalValue(new List<InsertedCoin>());
+            Assert.That(total == 0);
+        }
+
+        [Test]
+        public void CoinService_GetCoinsTotalValue_ValidCoinsInserted_ReturnsValue()
+        {
+            var insertedCoins = new List<InsertedCoin>() {
+                InsertedCoinsConstants.Penny,
+                InsertedCoinsConstants.Dime
+            };
+            var total = _sut.GetCoinsTotalValue(insertedCoins);
+            Assert.That(total == 11);
+        }
+
+
+        [Test]
+        public void CoinService_GetCoinsTotalValue_InValidCoinsInserted_ReturnsValue()
+        {
+            var insertedCoins = new List<InsertedCoin>() {
+                InsertedCoinsConstants.Penny,
+                new InsertedCoin(1,2,3)
+            };
+
+            Assert.Throws<Exception>(() => _sut.GetCoinsTotalValue(insertedCoins));
+        }
+
+        [Test]
+        [TestCase(1, 1)]
+        [TestCase(2, 2)]
+        [TestCase(6, 2)]
+        [TestCase(16, 3)]
+        [TestCase(27, 3)]
+        [TestCase(33, 5)]
+        [TestCase(125, 5)]
+        [TestCase(126, 6)]
+        public void CoinService_GetCoinsForAmount_NumberOfCoinsIsCorrect(int amount, int numberOfCoins)
+        {
+            var coins = _sut.GetCoinsForAmount(amount);
+
+            Assert.That(coins.Count == numberOfCoins);
         }
     }
 }

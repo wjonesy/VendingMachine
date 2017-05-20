@@ -1,10 +1,4 @@
 ﻿using Autofac;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VendingMachine.Core;
 using VendingMachine.Core.Coins;
 using VendingMachine.Core.Products;
 using VendingMachine.Core.State;

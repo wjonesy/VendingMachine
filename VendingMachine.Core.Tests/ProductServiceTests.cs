@@ -1,10 +1,7 @@
 ﻿using FakeItEasy;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VendingMachine.Core.Products;
 
 namespace VendingMachine.Core.Tests
@@ -33,6 +30,33 @@ namespace VendingMachine.Core.Tests
 
             Assert.That(products != null);
             Assert.That(products.Any());
+        }
+
+        [Test]
+        [TestCase(-100)]
+        [TestCase(0)]
+        [TestCase(-1)]
+        public void ProductService_Get_InvalidArgument_ThrowsException(int id)
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => _sut.Get(id));
+        }
+
+        [Test]
+        [TestCase(1)]
+        [TestCase(100)]
+        [TestCase(6634)]
+        public void ProductService_Get_ValidArgument_DoesNotThrowException(int id)
+        {
+            Assert.DoesNotThrow(() => _sut.Get(id));
+        }
+
+        [Test]
+        [TestCase(1)]
+        public void ProductService_Get_ValidArgument_ReturnsProduct(int id)
+        {
+            var product = _sut.Get(id);
+
+            Assert.That(product != null);
         }
     }
 }

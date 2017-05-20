@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VendingMachine.Core.Products
+﻿namespace VendingMachine.Core.Products
 {
     public class Product
     {
-        public Product(int id, string name, double price)
+        public Product(int id, string name, int price)
         {
             Id = id;
             Name = name;
@@ -17,6 +11,6 @@ namespace VendingMachine.Core.Products
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public double Price { get; set; }
+        public int Price { get; set; }
     }
 }

@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using VendingMachine.Core.InsertedCoins;
 
 namespace VendingMachine.Core.Coins
 {
     public interface ICoinService
     {
-        double? GetCoinValue(InsertedCoin insertedCoin);
+        Coin GetCoin(InsertedCoin insertedCoin);
 
-        double GetCoinsTotalValue(IEnumerable<InsertedCoin> insertedCoins);
+        int? GetCoinValue(InsertedCoin insertedCoin);
+
+        int GetCoinsTotalValue(IEnumerable<InsertedCoin> insertedCoins);
+
+        List<Coin> GetCoinsForAmount(int amount);
     }
 }
