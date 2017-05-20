@@ -11,15 +11,16 @@ namespace VendingMachine.Api.Controllers
 {
     public class ProductController : ApiController
     {
-        private static List<Product> _products = new List<Product> {
-            new Product(1,"Cola",1.00),
-            new Product(1,"Chips",0.50),
-            new Product(1,"Candy",0.65),
-        };
+        private IProductService _productService;
+
+        public ProductController(IProductService productService)
+        {
+            _productService = productService;
+        }
 
         public IHttpActionResult Get()
         {
-            return Ok(_products);
+            return Ok(_productService.GetAll());
         }
 
         public IHttpActionResult Vend(int productId)
