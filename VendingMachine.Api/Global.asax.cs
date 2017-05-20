@@ -28,9 +28,7 @@ namespace VendingMachine.Api
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-            // TODO Remove
-            // OPTIONAL: Register the Autofac filter provider.
-            //builder.RegisterWebApiFilterProvider(config);
+ 
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();

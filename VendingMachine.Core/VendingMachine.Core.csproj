@@ -53,7 +53,10 @@
     <Compile Include="Coins\ICoinService.cs" />
     <Compile Include="InsertedCoins\InsertedCoin.cs" />
     <Compile Include="InsertedCoins\InsertedCoinsConstants.cs" />
+    <Compile Include="Products\IProductService.cs" />
     <Compile Include="Products\Product.cs" />
+    <Compile Include="Products\ProductConstants.cs" />
+    <Compile Include="Products\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

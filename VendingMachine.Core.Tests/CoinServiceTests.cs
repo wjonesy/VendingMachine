@@ -8,7 +8,7 @@ namespace VendingMachine.Core.Tests
     [TestFixture]
     public class CoinServiceTests
     {
-        private ICoinService _sut;
+        private CoinService _sut;
         private InsertedCoin _coin_valid = InsertedCoinsConstants.Penny;
         private InsertedCoin _coin_invalid = new InsertedCoin(1, 2, 3);
         private double _pennyValue = CoinConstants.Penny.Value;
@@ -16,20 +16,18 @@ namespace VendingMachine.Core.Tests
         [SetUp]
         public void Setup()
         {
-            _sut = A.Fake<ICoinService>();
+            _sut = A.Fake<CoinService>();
         }
 
         [Test]
-        public void ICoinService_Exists()
+        public void CoinService_Exists()
         {
             Assert.That(_sut != null);
         }
 
         [Test]
-        public void ICoinService_GetCoinValue_ValidCoin_ReturnsValue()
-        {
-
-            A.CallTo(() => _sut.GetCoinValue(_coin_valid)).Returns(_pennyValue);
+        public void CoinService_GetCoinValue_ValidCoin_ReturnsValue()
+        {        
 
             var value = _sut.GetCoinValue(_coin_valid);
 
@@ -37,10 +35,8 @@ namespace VendingMachine.Core.Tests
         }
 
         [Test]
-        public void ICoinService_GetCoinValue_InvalidCoin_ReturnsNull()
+        public void CoinService_GetCoinValue_InvalidCoin_ReturnsNull()
         {
-
-            A.CallTo(() => _sut.GetCoinValue(_coin_invalid)).Returns(null);
             var value = _sut.GetCoinValue(_coin_invalid);
 
             Assert.AreEqual(null, value);
