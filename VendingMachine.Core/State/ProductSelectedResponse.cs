@@ -7,19 +7,19 @@ namespace VendingMachine.Core.State
     {
         private ProductSelectedResponse() { }
 
-        public ProductSelectedResponse(double amountToPay)
+        public ProductSelectedResponse(int productPrice)
         {
-            this.AmountToPay = amountToPay;
+            this.ProductPrice = productPrice;
             this.ReturnedCoins = null;
         }
 
         public ProductSelectedResponse(IEnumerable<Coin> returnedCoins)
         {
             this.ReturnedCoins = returnedCoins;
-            this.AmountToPay = null;
+            this.ProductPrice = null;
         }
 
-        public double? AmountToPay { get; private set; }
+        public int? ProductPrice { get; private set; }
 
         public IEnumerable<Coin> ReturnedCoins { get; private set; }
     }

@@ -67,7 +67,7 @@ namespace VendingMachine.Core.State
 
             if (totalValueInMachine < product.Price)
             {
-                return new ProductSelectedResponse(product.Price - totalValueInMachine);
+                return new ProductSelectedResponse(product.Price);
             }
             else
             {

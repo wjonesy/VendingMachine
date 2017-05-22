@@ -4,7 +4,8 @@
         API_URL: 'http://localhost:57535/',
         DISPLAY: {
             INSERT_COIN: 'INSERT COIN',
-            THANK_YOU: 'THANK YOU'
+            THANK_YOU: 'THANK YOU', 
+            PRICE:'PRICE'
         }
     };
 
@@ -69,8 +70,8 @@
                     return r.json();
                 })
                     .then(function (json) {
-                        if (json.amountToPay) {
-                            vendingMachine.display = CONSTANTS.DISPLAY.INSERT_COIN;
+                        if (json.productPrice) {
+                            vendingMachine.display = CONSTANTS.DISPLAY.PRICE + ' $' + formatToTwoDecimalPlaces(json.productPrice/100);
                         }
 
                         if (json.returnedCoins) {
