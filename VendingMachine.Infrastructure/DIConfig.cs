@@ -9,9 +9,9 @@ namespace VendingMachine.Infrastructure
     {
         public static ContainerBuilder ConfigureContainer(ContainerBuilder builder)
         {
-            builder.RegisterType<CoinService>().As<ICoinService>().InstancePerRequest();
-            builder.RegisterType<ProductService>().As<IProductService>().InstancePerRequest();
-            builder.RegisterType<VendingMachineStateManager>().As<IVendingMachineStateManager>().InstancePerRequest();
+            builder.RegisterType<CoinService>().As<ICoinService>().SingleInstance();
+            builder.RegisterType<ProductService>().As<IProductService>().SingleInstance();
+            builder.RegisterType<VendingMachineStateManager>().As<IVendingMachineStateManager>().SingleInstance();
 
             return builder;
         }
