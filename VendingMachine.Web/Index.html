@@ -3,26 +3,38 @@
 <head>
     <meta charset="utf-8" />
     <title>Vending Machine</title>
-    
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet" />
 </head>
 <body>
-    <h1>Vending Machine</h1>
     <div id="vendingMachine">
-        
-        Money in my pocket: <button v-for="coin in coins" :disabled="insertingCoin" v-on:click="insertCoin(coin)">{{coin.name}}</button>
-        <hr />
-        Products: <button v-for="product in products" v-on:click="vend(product)">{{product.name}} - ${{product.price/100}}</button>
-       
 
-        <hr />
-        <p>Display: {{display}}</p>
-        <hr />
-        <button v-on:click="refund">Refund</button>
-        <p v-if="refundedCoins.length > 0">Refunded Coins</p>
-        <ul>
-            <li v-for="coin in refundedCoins">${{coin.value/100}}</li>
-        </ul>
+
+        <div class="vending-machine">
+
+            <div class="vending-machine-products">
+                <div class="vending-machine-product" v-for="product in products" v-on:click="vend(product)">{{product.name}} - {{product.formattedPrice}}</div>
+            </div>
+            <div class="vending-machine-rhs">
+                <div class="vending-machine-display">
+                    {{display}}
+                </div>
+                <div class="vending-machine-money-drop js-vending-machine-money-drop">Insert monies here</div>
+
+                <div class="vending-machine-refund">
+                    <div>Refunded Coins</div>
+                    <div v-for="coin in refundedCoins">${{coin.value/100}}</div>
+                    <button v-on:click="refund">Get Refund</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="js-coins coins">
+            <div class="coin" v-bind:class="[coin.name]" v-for="coin in coins">{{coin.name}}</div>
+        </div>
     </div>
+    <script src="js/vendingMachine.js"></script>   
     <script src="js/libs/fetch.js"></script>
     <!--Use CDN for this example app -->
     <script src="https://unpkg.com/vue"></script>

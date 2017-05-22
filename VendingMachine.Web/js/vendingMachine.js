@@ -4,8 +4,8 @@
         API_URL: 'http://localhost:57535/',
         DISPLAY: {
             INSERT_COIN: 'INSERT COIN',
-            THANK_YOU: 'THANK YOU', 
-            PRICE:'PRICE'
+            THANK_YOU: 'THANK YOU',
+            PRICE: 'PRICE'
         }
     };
 
@@ -17,10 +17,12 @@
             coins: initCoins(),
             display: 'INSERT COIN',
             insertingCoin: null,
-            refundedCoins: []
+            refundedCoins: [],
+            movingCoin: null
         },
         methods: {
-            insertCoin: function (coin) {
+            insertCoin: function () {
+                var coin = vendingMachine.movingCoin;
                 //vendingMachine.display = CONSTANTS.DISPLAY.INSERT_COIN;
                 vendingMachine.refundedCoins = [];
 
@@ -43,6 +45,7 @@
                     .then(function (json) {
                         vendingMachine.display = '$' + Number(json / 100).toFixed(2);
                         vendingMachine.insertingCoin = false;
+                        vendingMachine.movingCoin = null;
                     });
 
 
@@ -60,6 +63,7 @@
                             vendingMachine.refundedCoins = [];
                         }
                         vendingMachine.display = CONSTANTS.DISPLAY.INSERT_COIN;
+                        initCoinDropDragAndDrop();
                     });
             },
             vend: function (product) {
@@ -71,12 +75,13 @@
                 })
                     .then(function (json) {
                         if (json.productPrice) {
-                            vendingMachine.display = CONSTANTS.DISPLAY.PRICE + ' $' + formatToTwoDecimalPlaces(json.productPrice/100);
+                            vendingMachine.display = CONSTANTS.DISPLAY.PRICE + ' $' + formatToTwoDecimalPlaces(json.productPrice / 100);
                         }
 
                         if (json.returnedCoins) {
                             vendingMachine.display = CONSTANTS.DISPLAY.THANK_YOU;
                             vendingMachine.refundedCoins = formatRefundedCoins(json.returnedCoins);
+                            initCoinDropDragAndDrop();
                         }
                     });
             }
@@ -104,13 +109,69 @@
             return r.json();
         })
             .then(function (json) {
+                
+                json.products.forEach(function (product) {
+                    product.formattedPrice = '$'+formatToTwoDecimalPlaces(product.price/100);
+                });
                 vendingMachine.products = json.products;
                 if (json.valueOfCoinsInMachine) {
-                    vendingMachine.display = '$'+formatToTwoDecimalPlaces(json.valueOfCoinsInMachine/100);
+                    vendingMachine.display = '$' + formatToTwoDecimalPlaces(json.valueOfCoinsInMachine / 100);
                 } else {
                     vendingMachine.display = CONSTANTS.DISPLAY.INSERT_COIN;
                 }
+                initCoinsDragAndDrop();
+                initCoinDropDragAndDrop();
             });
+    }
+
+    function initCoinsDragAndDrop() {
+
+        Sortable.create(document.querySelector(".js-coins"), {
+            group: {
+                name: 'vendingMachineCoins',
+                pull: 'clone',
+                put: false
+            },
+            sort: false,
+            onStart: function () {
+                toggleCoinDropHighlight();
+            },
+            onEnd: function () {
+                toggleCoinDropHighlight();
+            },
+            onMove: function (evt, originalElement) {
+
+
+            },
+            onClone: function (/**Event*/evt) {
+                vendingMachine.movingCoin = vendingMachine.coins.filter(function (c) {
+                    return c.name === evt.clone.innerHTML;
+                })[0];
+            }
+        });
+    }
+
+    function initCoinDropDragAndDrop() {
+        var coinDrop= document.querySelector(".js-vending-machine-money-drop");
+        coinDrop.innerHTML = 'Drag monies here';
+        Sortable.create(coinDrop, {
+            group: {
+                name: 'vendingMachineCoins',
+                pull: false,
+                put: true
+            },
+            onAdd: function (evt) {
+                vendingMachine.insertCoin();
+            }
+        });
+
+    }
+
+    function toggleCoinDropHighlight() {
+        var coinDrop = document.querySelector('.vending-machine-money-drop');
+        if (coinDrop) {
+            coinDrop.classList.toggle('highlight');
+        }
     }
 
     function initCoins() {

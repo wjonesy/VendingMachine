@@ -1,0 +1,113 @@
+﻿.body {
+}
+
+
+
+.vending-machine {
+    width: 100%;
+    margin: 0 auto;
+    background: #000;
+    padding: 5px;
+    display: flex;
+}
+
+
+
+.vending-machine-products {
+    color: #fff;
+    flex: 1;
+}
+
+.vending-machine-rhs {
+    flex: 1;
+}
+
+.vending-machine-product {
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    margin: 5px;
+    border: 5px solid #313131;
+    padding: 5px;
+}
+
+.vending-machine-display {
+    margin: 5px auto;
+}
+
+.vending-machine-money-drop {
+    background: #eee;
+    min-height: 100px;
+    display: inline-block;
+    padding: 10px;
+    text-align: center;
+    border: 5px solid #eee;
+    display: block;
+    margin: 5px auto;
+    transition: border-color 0.25s ease;
+}
+    .vending-machine-money-drop.highlight {
+        border-color: red;
+        transition: border-color 0.5s ease;
+    }
+
+.vending-machine-refund {
+    background: #fff;
+    min-height: 100px;
+    padding: 10px;
+    text-align: center;
+    display: block;
+    margin: 5px auto;
+}
+
+
+
+.vending-machine-refund {
+}
+
+.vending-machine-display {
+    font-family: 'Orbitron', sans-serif;
+    color: red;
+    text-align: center;
+}
+
+.coins {
+    margin: 50px auto 0 auto;
+    width: 100%;
+}
+
+.coin {
+    border-radius: 100%;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+    .coin.Penny {
+        width: 95px;
+        height: 95px;
+        background: #f1dbc9;
+    }
+
+    .coin.Nickel {
+        width: 105px;
+        height: 105px;
+        background: #f9f7f3;
+    }
+
+    .coin.Dime {
+        width: 90px;
+        height: 90px;
+        background: #f9f7f3;
+    }
+
+    .coin.Quarter {
+        width: 120px;
+        height: 120px;
+        background: #f9f7f3;
+    }
+
+@media screen and (min-width:767px) {
+    .vending-machine, .coins {
+        width: 50%;
+    }
+}

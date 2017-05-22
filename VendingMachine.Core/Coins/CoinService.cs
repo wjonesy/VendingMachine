@@ -7,27 +7,23 @@ namespace VendingMachine.Core.Coins
 {
     public class CoinService : ICoinService
     {
-        private readonly List<Coin> _coins;
-        private readonly List<InsertedCoin> _availableCoins;
-        private readonly List<Tuple<double, double, double, int>> _coinDimensionsToCoinValueMap;
-
-
-        public CoinService()
-        {
-            _coins = new List<Coin>() {
+        private static readonly List<Coin> _coins=new List<Coin>() {
                 CoinConstants.Penny,
                 CoinConstants.Nickel,
                 CoinConstants.Dime,
                 CoinConstants.Quarter
-            };
-
-            _availableCoins = new List<InsertedCoin>() {
+    };
+    private static readonly List<InsertedCoin> _availableCoins =new List<InsertedCoin>() {
                 InsertedCoinsConstants.Penny,
                 InsertedCoinsConstants.Nickel,
                 InsertedCoinsConstants.Dime,
                 InsertedCoinsConstants.Quarter
-            };
+    };
+    private readonly List<Tuple<double, double, double, int>> _coinDimensionsToCoinValueMap;
 
+
+        public CoinService()
+        {
             if (_coinDimensionsToCoinValueMap == null)
             {
                 _coinDimensionsToCoinValueMap = new List<Tuple<double, double, double, int>>();

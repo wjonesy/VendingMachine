@@ -42,7 +42,8 @@ namespace VendingMachine.Core.State
 
             // add the coin to the machine
             coinsInMachine.Add(coin);
-            _cache.Add(new CacheItem("coins_in_machine", coinsInMachine), new CacheItemPolicy());
+            RemoveCoinsCache();
+            _cache.Add(new CacheItem(_cache_coinsInMachine, coinsInMachine), new CacheItemPolicy());
 
 
             // return the new value of all the coins in the machine
@@ -118,7 +119,7 @@ namespace VendingMachine.Core.State
             return new VendingMachineState()
             {
                 Products = _productService.GetAll(),
-                ValueOfCoinsInMachine = coinsInMachine == null || !coinsInMachine.Any() ? 0 : _coinService.GetCoinsTotalValue(GetCoinsInMachine())
+                ValueOfCoinsInMachine = coinsInMachine == null || !coinsInMachine.Any() ? 0 : _coinService.GetCoinsTotalValue(coinsInMachine)
             };
         }
     }

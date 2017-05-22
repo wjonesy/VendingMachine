@@ -6,14 +6,14 @@ namespace VendingMachine.Core.Products
 {
     public class ProductService : IProductService
     {
-        private readonly IEnumerable<Product> _products;
-        public ProductService()
-        {
-            _products = new Product[] {
+        private static readonly IEnumerable<Product> _products = new Product[] {
                 ProductConstants.Cola,
                 ProductConstants.Candy,
                 ProductConstants.Chips
-            };
+    };
+        public ProductService()
+        {
+
         }
 
         public Product Get(int id)

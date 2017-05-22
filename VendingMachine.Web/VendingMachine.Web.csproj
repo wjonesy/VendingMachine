@@ -65,7 +65,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\main.css" />
     <Content Include="js\libs\fetch.js" />
+    <Content Include="js\libs\Sortable.min.js" />
     <Content Include="js\vendingMachine.js" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
