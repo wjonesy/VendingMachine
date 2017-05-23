@@ -81,6 +81,7 @@
     display: inline-block;
     margin-right: 15px;
     position:relative;
+    cursor:move;
 }
 
     .coin.Penny {
