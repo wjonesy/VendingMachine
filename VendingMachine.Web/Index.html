@@ -8,10 +8,7 @@
 </head>
 <body>
     <div id="vendingMachine">
-
-
         <div class="vending-machine">
-
             <div class="vending-machine-products">
                 <div class="vending-machine-product" v-for="product in products" v-on:click="vend(product)">{{product.name}} - {{product.formattedPrice}}</div>
             </div>
@@ -27,11 +24,9 @@
                     <button v-on:click="refund">Get Refund</button>
                 </div>
             </div>
-
         </div>
-
         <div class="js-coins coins">
-            <div class="coin" v-bind:class="[coin.name]" v-for="coin in coins">{{coin.name}}</div>
+            <div class="coin" v-bind:class="[coin.name]" v-for="coin in coins"><div class="coin-text">{{coin.name}}</div></div>
         </div>
     </div>  
     <script src="js/libs/Sortable.min.js"></script>

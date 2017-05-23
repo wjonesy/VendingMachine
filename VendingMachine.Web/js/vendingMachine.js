@@ -109,9 +109,9 @@
             return r.json();
         })
             .then(function (json) {
-                
+
                 json.products.forEach(function (product) {
-                    product.formattedPrice = '$'+formatToTwoDecimalPlaces(product.price/100);
+                    product.formattedPrice = '$' + formatToTwoDecimalPlaces(product.price / 100);
                 });
                 vendingMachine.products = json.products;
                 if (json.valueOfCoinsInMachine) {
@@ -145,14 +145,16 @@
             },
             onClone: function (/**Event*/evt) {
                 vendingMachine.movingCoin = vendingMachine.coins.filter(function (c) {
-                    return c.name === evt.clone.innerHTML;
+                    
+                    return evt.clone.className.indexOf(c.name) > -1;
                 })[0];
+
             }
         });
     }
 
     function initCoinDropDragAndDrop() {
-        var coinDrop= document.querySelector(".js-vending-machine-money-drop");
+        var coinDrop = document.querySelector(".js-vending-machine-money-drop");
         coinDrop.innerHTML = 'Drag monies here';
         Sortable.create(coinDrop, {
             group: {
